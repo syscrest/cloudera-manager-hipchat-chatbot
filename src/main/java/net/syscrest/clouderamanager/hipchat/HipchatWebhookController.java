@@ -59,6 +59,8 @@ public class HipchatWebhookController {
 					.withUsernamePassword(cmConf.user, cmConf.password)
 					.withHost(cmConf.hostname).setThreadSafe(true)
 					.withPort(cmConf.port).build().getRootV11();
+			logger.info("remote cm api version = " + apiRoot.getClouderaManagerResource().getVersion());
+			
 		} catch (Exception e) {
 			logger.error(
 					"could not connect to cloudera manager using configuration = "

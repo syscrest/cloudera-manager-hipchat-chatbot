@@ -12,7 +12,7 @@ apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'spring-boot'
 
-group = 'com.syscrest'
+group = 'net.syscrest'
 
 jar {
   baseName = 'cloudera-manager-hipchat-chatbot'
@@ -27,6 +27,7 @@ repositories {
 
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
+
 
 dependencies {
 
@@ -57,3 +58,4 @@ dependencies {
 task wrapper(type: Wrapper) {
     gradleVersion = '2.11'
 }
+

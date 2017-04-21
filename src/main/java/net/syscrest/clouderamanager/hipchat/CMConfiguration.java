@@ -41,4 +41,11 @@ public class CMConfiguration {
 	@Value("${cm.port}")
 	public int port;
 
+	@Override
+	public String toString() {
+		return "CMConfiguration [mapper=" + mapper + ", user=" + user + ", password=" + password + ", hostname="
+				+ hostname + ", port=" + port + "]";
+	}
+
+	
 }

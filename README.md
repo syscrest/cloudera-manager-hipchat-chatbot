@@ -42,13 +42,41 @@ Link: https://blog.hipchat.com/2015/02/11/build-your-own-integration-with-hipcha
 cm.password=<cm login password>
 cm.user=<cm user name>
 cm.hostname=<Cloudera Manager hostname>
-cm.port=<Cloudera Manager server port>
-server.port=<Hipchat server port>
+cm.port=<Cloudera Manager server port, normally 7180>
+server.port=<port to listen on>
 webhook.room.id=<room id>
 webhook.notificationUrl =<your notification url>
 ```
 
 * start application by running `path/to/java-version/bin/java -jar cloudera-manager-hipchat-chatbot-[version].jar` from your bash
+
+You can also use supervisord to start it as a deamon)
+
+(instructions taken from http://stackoverflow.com/questions/21503883/spring-boot-application-as-a-service as the 3rd party libs forces us to stay on spring boot 1.2.5)
+```
+#/etc/supervisor/conf.d/cloudera-manager-hipchat-chatbot.conf
+[program:cmchatbot]
+command=/usr/bin/java -jar /path/to/application.jar
+user=usertorun
+autostart=true
+autorestart=true
+startsecs=10
+startretries=3
+stdout_logfile=/var/log/cmchatbot-stdout.log
+stderr_logfile=/var/log/cmchatbot-stderr.log
+```
+
+and then use
+```
+# sudo supervisorctl
+cmchatbot             RUNNING   pid 123123, uptime 1 day, 15:00:00
+supervisor> stop cmchatbot
+supervisor> start cmchatbot
+```
+
+to start/stop your instance.
+
+
 
 ## Communicate with the Chatbot
 Creating the chatroom you chose a slash command for the communication. For example `/cm`. This implies that you need to precede each command with `/cm`. If you are not sure which commands are available start with `/cm help`. The chatbot will respond listing all available commands.

@@ -33,7 +33,14 @@ public class WebhookConfiguration {
 	public int roomId;
 	
 	@Value("${webhook.notificationUrl}")
-	public String notificationUrl;	
+	public String notificationUrl;
 
+	@Override
+	public String toString() {
+		return "WebhookConfiguration [mapper=" + mapper + ", roomId=" + roomId + ", notificationUrl=" + notificationUrl
+				+ "]";
+	}	
+
+	
 
 }
